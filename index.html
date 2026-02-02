@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Interactive Flowchart</title>
+  <title>Optimization Workflow</title>
 
   <style>
     body {
@@ -11,46 +11,75 @@
       margin: 30px;
     }
 
-    
-    .container {
+    h2 {
+      margin-bottom: 40px;
+    }
+
+    /* 页面整体布局：左侧模块 + 右侧流程图 */
+    .main-layout {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 50px;
+    }
+
+    /* 左侧栏 */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* 左侧模块框 */
+    .side-box {
       position: relative;
-      display: inline-block;
-      width: 90%;
-    }
-
-    .flowchart {
-      width: 120%;
-    }
-
-    /* Hover box area */
-    .hover-area {
-      position: absolute;
-      top: 35%;
-      left: 30%;
-      width: 15%;
-      height: 12%;
+      background: #bcdcff;
+      padding: 15px 20px;
+      width: 200px;
+      border-radius: 15px;
+      font-weight: bold;
       cursor: pointer;
+      text-align: center;
+      box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
     }
 
-    /* Tooltip popup */
-    .tooltip {
+    /* Tooltip 默认隐藏 */
+    .side-box .tooltip {
       visibility: hidden;
+      opacity: 0;
+
       position: absolute;
+      left: 110%;
       top: 50%;
-      left: 50%;
-      transform: translate(-50%, -120%);
+      transform: translateY(-50%);
+
       background: white;
       border: 1px solid black;
       padding: 12px;
       border-radius: 10px;
-      width: 220px;
+      width: 260px;
+
       box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+
+      transition: opacity 0.3s;
       z-index: 10;
+      text-align: left;
+      font-weight: normal;
     }
 
-    /* Show tooltip on hover */
-    .hover-area:hover .tooltip {
+    /* Hover 显示 tooltip */
+    .side-box:hover .tooltip {
       visibility: visible;
+      opacity: 1;
+    }
+
+    /* 流程图区域 */
+    .flowchart-area {
+      width: 900px;
+    }
+
+    .flowchart {
+      width: 100%;
     }
   </style>
 </head>
@@ -59,23 +88,63 @@
 
   <h2>Optimization Workflow</h2>
 
- <div class="container">
+  <div class="main-layout">
 
-  <!-- Flowchart image -->
-  <img src="Frame.svg" class="flowchart">
+    <!-- 左侧模块栏 -->
+    <div class="sidebar">
 
-  <!-- Hover region -->
-  <div class="hover-area" style="top:20%;left:10%;width:18%;height:12%;">
+      <!-- Geometry -->
+      <div class="side-box">
+        Geometry
+        <div class="tooltip">
+          <b>Grid geometry (X)</b><br><br>
+          Parameters include:<br>
+          • rib width<br>
+          • rib thickness<br>
+          • rib spacing<br>
+          • frame thickness<br>
+          • lug area
+        </div>
+      </div>
 
-    <!-- Tooltip content -->
-    <div class="tooltip">
-      <b>Grid geometry</b><br>
-      X: rib width/ thickness/ spcing, frame thickness, lug area
+      <!-- Physical Features -->
+      <div class="side-box">
+        Physical Features
+        <div class="tooltip">
+          Extracted geometric/physics features such as:<br>
+          • volume<br>
+          • surface area<br>
+          • flow resistance indicators
+        </div>
+      </div>
+
+      <!-- Pressure Drop -->
+      <div class="side-box">
+        Pressure Drop
+        <div class="tooltip">
+          <b>Pressure Drop (ΔP)</b><br><br>
+          Pressure loss between inlet and outlet.<br>
+          Important for evaluating flow efficiency.
+        </div>
+      </div>
+
+      <!-- Fill Quality -->
+      <div class="side-box">
+        Fill Quality
+        <div class="tooltip">
+          Indicates how well the cavity is filled during simulation.<br>
+          Useful for manufacturing feasibility.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 右侧流程图 -->
+    <div class="flowchart-area">
+      <img src="Frame.svg" class="flowchart">
     </div>
 
   </div>
-
-</div>
 
 </body>
 </html>
