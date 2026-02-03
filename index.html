@@ -12,6 +12,7 @@
       font-family: Arial;
       text-align: center;
       margin: 30px;
+      overflow-x: hidden;
     }
 
     h2 {
@@ -81,13 +82,16 @@
 
     /* 流程图区域 */
     .flowchart-area {
-      height: auto;
-      object-fit: contain;
-      width: auto;
+      flex: 1;
+  min-width: 0;         /* ✅关键：防止溢出 */
+  display: flex;
+  justify-content: center;
     }
 
     .flowchart {
-      width: 130%;
+      max-height: 80vh;
+  max-width: 100%;      /* ✅关键：宽度适配 */
+  width: auto;
     }
   </style>
 </head>
